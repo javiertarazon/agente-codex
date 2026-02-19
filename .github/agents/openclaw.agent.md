@@ -42,6 +42,13 @@ Coordina sub-agentes según `.codex-agent/agent-config.yaml`:
 - `api-agent` → GitHub Models API local
 - `git-agent` → operaciones git
 
-## Lectura de skill completo
-Al iniciar, leer instrucciones completas desde:
-`.github/skills/openclaw-local-agent/SKILL.md`
+## Skills disponibles
+Cargar con `read_file` según el dominio de la tarea:
+
+| Skill | Ruta | Trigger |
+|-------|------|---------|
+| `openclaw-local-agent` | `.github/skills/openclaw-local-agent/SKILL.md` | Siempre activo |
+| `task-tracker` | `.github/skills/task-tracker/SKILL.md` | Gestión de tareas y audit |
+| `windows-admin` | `.github/skills/windows-admin/SKILL.md` | Admin Windows, BCD, drivers |
+| `api-local` | `.github/skills/api-local/SKILL.md` | Proxy GitHub Models |
+| `chrome-cdp` | `.github/skills/chrome-cdp/SKILL.md` | Chrome automation |

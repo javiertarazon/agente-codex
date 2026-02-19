@@ -1,5 +1,58 @@
 version: 1
-updated_at: "2026-02-19T00:00:00-04:00"
+updated_at: "2026-02-19T00:01:00-04:00"
+
+# ─────────────────────────────────────────────
+# Skills activos
+# ─────────────────────────────────────────────
+skills:
+  - id: openclaw-local-agent
+    file: .github/skills/openclaw-local-agent/SKILL.md
+    always_active: true
+    description: Skill maestro del agente primario
+  - id: task-tracker
+    file: .github/skills/task-tracker/SKILL.md
+    triggers: [tarea, audit, RESUME, cola, task]
+    description: Gestión de tareas, audit-log y reanudación
+  - id: windows-admin
+    file: .github/skills/windows-admin/SKILL.md
+    triggers: [admin, elevado, RunAs, BCD, driver, WinRE, servicios, pagefile, boot]
+    description: Administración elevada de Windows
+  - id: api-local
+    file: .github/skills/api-local/SKILL.md
+    triggers: [api local, proxy, github models, modelo, test api, iniciar api]
+    description: Proxy GitHub Models local en :8787
+  - id: chrome-cdp
+    file: .github/skills/chrome-cdp/SKILL.md
+    triggers: [chrome, navegar, scraping, clic, formulario, CDP, browser]
+    description: Automatización Chrome vía Chrome DevTools Protocol
+  - id: coding-agent
+    file: .github/skills/coding-agent/SKILL.md
+    triggers: [codex, claude, agente de código, background agent, full-auto, yolo]
+    description: Lanzar Codex CLI / Claude Code / agentes en background con PTY
+  - id: github
+    file: .github/skills/github/SKILL.md
+    triggers: [gh pr, gh issue, gh run, pull request, CI, workflow, github cli]
+    description: GitHub CLI (gh) — issues, PRs, CI runs, gh api
+  - id: tmux
+    file: .github/skills/tmux/SKILL.md
+    triggers: [tmux, sesión, paralelo, agentes en paralelo, socket tmux]
+    description: Sesiones tmux, orquestar agentes en paralelo
+  - id: review-pr
+    file: .github/skills/review-pr/SKILL.md
+    triggers: [revisar PR, review-pr, código del PR, findings, review pull request]
+    description: Revisión de PRs con findings estructurados
+  - id: prepare-pr
+    file: .github/skills/prepare-pr/SKILL.md
+    triggers: [preparar PR, prepare-pr, rebase, gates, push PR]
+    description: Preparar PR para merge — rebase, fix, gates, push
+  - id: merge-pr
+    file: .github/skills/merge-pr/SKILL.md
+    triggers: [merge PR, squash merge, mergear, aterrizar PR]
+    description: Merge determinista con squash y verificación
+  - id: skill-creator
+    file: .github/skills/skill-creator/SKILL.md
+    triggers: [crear skill, nuevo skill, SKILL.md, empaquetar skill]
+    description: Diseñar, crear y empaquetar nuevos skills
 
 # ─────────────────────────────────────────────
 # Configuración del agente primario

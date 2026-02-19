@@ -21,9 +21,38 @@ Tu identidad operativa es: **openclaw-local-agent**.
 4. Para tareas `high-risk`: registrar `requires_double_confirmation: true` y pedir confirmación única antes de ejecutar.
 5. Idioma de trabajo: **español** por defecto.
 
-## Skill openclaw-local-agent
-Leer definición completa desde:
-- `.github/skills/openclaw-local-agent/SKILL.md`
+## Skills activos
+
+Cargar el skill correspondiente según el dominio de la tarea. Usar `read_file` para obtener las instrucciones completas antes de ejecutar.
+
+| Skill | Archivo | Cuándo usarlo |
+|-------|---------|---------------|
+| `openclaw-local-agent` | `.github/skills/openclaw-local-agent/SKILL.md` | Siempre — skill maestro del agente primario |
+| `task-tracker` | `.github/skills/task-tracker/SKILL.md` | Crear/actualizar tareas, audit-log, RESUME.md |
+| `windows-admin` | `.github/skills/windows-admin/SKILL.md` | Servicios, pagefile, BCD, drivers, WinRE, RunAs |
+| `api-local` | `.github/skills/api-local/SKILL.md` | Arrancar/parar proxy, llamar a GitHub Models |
+| `chrome-cdp` | `.github/skills/chrome-cdp/SKILL.md` | Chrome automation, navegación, JS, scraping |
+| `coding-agent` | `.github/skills/coding-agent/SKILL.md` | Lanzar Codex CLI, Claude Code, agentes en background |
+| `github` | `.github/skills/github/SKILL.md` | gh CLI: issues, PRs, CI runs, gh api |
+| `tmux` | `.github/skills/tmux/SKILL.md` | Sesiones tmux, orquestar agentes en paralelo |
+| `review-pr` | `.github/skills/review-pr/SKILL.md` | Revisión de PRs — producir findings estructurados |
+| `prepare-pr` | `.github/skills/prepare-pr/SKILL.md` | Preparar PR para merge (rebase, fix, gates, push) |
+| `merge-pr` | `.github/skills/merge-pr/SKILL.md` | Merge determinista con squash y verificación |
+| `skill-creator` | `.github/skills/skill-creator/SKILL.md` | Diseñar, crear y empaquetar nuevos skills |
+
+### Triggers de carga automática de skill
+
+- **task-tracker** → al crear, actualizar o cerrar cualquier tarea
+- **windows-admin** → palabras clave: `admin`, `elevado`, `RunAs`, `BCD`, `driver`, `WinRE`, `servicios`, `pagefile`, `boot`
+- **api-local** → palabras clave: `api local`, `proxy`, `github models`, `modelo`, `test api`, `iniciar api`
+- **chrome-cdp** → palabras clave: `chrome`, `navegar`, `scraping`, `clic`, `formulario`, `CDP`, `browser`
+- **coding-agent** → palabras clave: `codex`, `claude`, `agente de código`, `background agent`, `full-auto`, `yolo`
+- **github** → palabras clave: `gh pr`, `gh issue`, `gh run`, `pull request`, `CI`, `workflow`, `github cli`
+- **tmux** → palabras clave: `tmux`, `sesión`, `paralelo`, `agentes en paralelo`, `socket tmux`
+- **review-pr** → palabras clave: `revisar PR`, `review-pr`, `código del PR`, `findings`
+- **prepare-pr** → palabras clave: `preparar PR`, `prepare-pr`, `rebase`, `gates`, `push PR`
+- **merge-pr** → palabras clave: `merge PR`, `squash merge`, `mergear`, `aterrizar PR`
+- **skill-creator** → palabras clave: `crear skill`, `nuevo skill`, `SKILL.md`, `empaquetar skill`
 
 ## Configuración multi-agente y auto-ejecución
 Leer desde:

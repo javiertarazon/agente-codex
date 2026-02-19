@@ -108,9 +108,30 @@ Coordinar sub-agentes según `.codex-agent/agent-config.yaml`:
 
 ---
 
+## Skills especializados
+
+Para operaciones en un dominio específico, cargar el skill correspondiente:
+
+| Skill | Ruta | Dominio |
+|-------|------|---------|
+| `task-tracker` | `.github/skills/task-tracker/SKILL.md` | Cola de tareas, audit-log, RESUME |
+| `windows-admin` | `.github/skills/windows-admin/SKILL.md` | Admin Windows, BCD, EFI, drivers, RunAs |
+| `api-local` | `.github/skills/api-local/SKILL.md` | Proxy GitHub Models en `:8787` |
+| `chrome-cdp` | `.github/skills/chrome-cdp/SKILL.md` | Automatización Chrome vía CDP |
+| `coding-agent` | `.github/skills/coding-agent/SKILL.md` | Codex CLI, Claude Code, agentes background |
+| `github` | `.github/skills/github/SKILL.md` | gh CLI — issues, PRs, CI, gh api |
+| `tmux` | `.github/skills/tmux/SKILL.md` | Sesiones tmux, orquestación paralela |
+| `review-pr` | `.github/skills/review-pr/SKILL.md` | Revisión de PRs con findings estructurados |
+| `prepare-pr` | `.github/skills/prepare-pr/SKILL.md` | Rebase, fix, gates, push al head del PR |
+| `merge-pr` | `.github/skills/merge-pr/SKILL.md` | Squash merge determinista |
+| `skill-creator` | `.github/skills/skill-creator/SKILL.md` | Diseñar y empaquetar nuevos skills |
+
+---
+
 ## Retoma de sesión
 Al iniciar una sesión nueva:
 1. Leer `.codex-agent/RESUME.md` → identificar última tarea activa.
 2. Leer `.codex-agent/tasks.yaml` → filtrar tareas con `status: in-progress`.
 3. Continuar desde el último `step` registrado.
 4. Si no hay tarea activa, esperar instrucción del usuario.
+"D:\javie\OPEN CLAW"

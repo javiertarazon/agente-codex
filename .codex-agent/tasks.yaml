@@ -421,6 +421,45 @@
                     "text": "actualizado .codex-agent/global/model_instructions_global.md: agregado auto-ejecución, multi-agente e identidad openclaw"
                 }
             ]
+        },
+        {
+            "id": "task-20260219-openclaw-skills-import",
+            "title": "Importar y activar 7 skills de OPEN CLAW en workspace agente-codex",
+            "status": "done",
+            "scope": "workspace",
+            "risk": "low",
+            "requires_double_confirmation": false,
+            "created_at": "2026-02-19T00:02:00-04:00",
+            "steps": [
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "explorado /mnt/d/javie/OPEN CLAW/skills/ y .agents/skills/ — identificados 60+ skills disponibles"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "seleccionados 7 skills útiles: coding-agent, github, tmux, skill-creator, review-pr, prepare-pr, merge-pr"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "creados 7 SKILL.md en .github/skills/ vía create_file (cp falló por espacios en ruta WSL)"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "creado .github/skills/PR_WORKFLOW.md: flujo completo review→prepare→merge"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "actualizado copilot-instructions.md: tabla expandida de 5 a 12 skills con triggers por keywords"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "actualizado agent-config.yaml: sección skills expandida de 5 a 12 entradas con keywords de trigger"
+                },
+                {
+                    "timestamp": "2026-02-19T00:02:00-04:00",
+                    "text": "actualizado openclaw-local-agent/SKILL.md: tabla de skills especialziados expandida a 11 entradas"
+                }
+            ]
         }
     ]
 }
