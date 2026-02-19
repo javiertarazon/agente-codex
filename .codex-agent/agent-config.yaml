@@ -1,0 +1,120 @@
+version: 1
+updated_at: "2026-02-19T00:00:00-04:00"
+
+# ─────────────────────────────────────────────
+# Configuración del agente primario
+# ─────────────────────────────────────────────
+primary_agent:
+  id: openclaw-local-agent
+  mode: execution-first
+  language: es
+  skill_file: .github/skills/openclaw-local-agent/SKILL.md
+  task_ledger: .codex-agent/tasks.yaml
+  audit_log: .codex-agent/audit-log.jsonl
+  resume_file: .codex-agent/RESUME.md
+
+# ─────────────────────────────────────────────
+# Política de auto-ejecución
+# ─────────────────────────────────────────────
+auto_execution:
+  enabled: true
+  rules:
+    - risk: low
+      requires_confirmation: false
+      auto_run: true
+    - risk: medium
+      requires_confirmation: false
+      auto_run: true
+      notify_on_complete: true
+    - risk: high
+      requires_confirmation: true
+      confirmation_type: single      # solo UNA confirmación del usuario
+      auto_run: false
+      requires_double_confirmation: true
+
+# ─────────────────────────────────────────────
+# Sub-agentes disponibles
+# ─────────────────────────────────────────────
+sub_agents:
+  - id: browser-agent
+    description: Automatización Chrome vía CDP
+    trigger_keywords:
+      - "navegar a"
+      - "abrir chrome"
+      - "hacer clic en"
+      - "llenar formulario"
+      - "scraping"
+    scripts:
+      - .codex-agent/start_chrome_cdp.ps1
+      - .codex-agent/chrome_cdp.ps1
+    risk_default: medium
+
+  - id: admin-agent
+    description: Operaciones elevadas Windows (SCM, registry, BCD, drivers)
+    trigger_keywords:
+      - "elevado"
+      - "administrador"
+      - "run as"
+      - "registry"
+      - "bcdedit"
+      - "reagentc"
+      - "drivers"
+    scripts:
+      - .codex-agent/windows_light_admin.ps1
+      - .codex-agent/boot_remediation_admin.ps1
+      - .codex-agent/run_windows_light_elevated.ps1
+    risk_default: high
+
+  - id: api-agent
+    description: Consultas a GitHub Models API local o remota
+    trigger_keywords:
+      - "llamar al modelo"
+      - "chat con ia"
+      - "api local"
+      - "github models"
+    scripts:
+      - tools/github_models_proxy.py
+      - tools/start_api_tmux.sh
+      - tools/test_api_local.sh
+    endpoint: http://127.0.0.1:8787
+    risk_default: low
+
+  - id: git-agent
+    description: Operaciones git (commit, push, PR, branches)
+    trigger_keywords:
+      - "hacer commit"
+      - "publicar"
+      - "push"
+      - "crear rama"
+      - "pull request"
+    risk_default: low
+
+# ─────────────────────────────────────────────
+# Flujo de delegación multi-agente
+# ─────────────────────────────────────────────
+multiagent_flow:
+  delegation_strategy: keyword-match   # detecta sub-agente por palabras clave
+  result_aggregation: primary          # agente primario recibe y agrega resultados
+  task_id_derivation: "{parent_id}-sub{n}"
+  shared_audit_log: true               # todos los agentes escriben en el mismo jsonl
+
+# ─────────────────────────────────────────────
+# Seguridad Git
+# ─────────────────────────────────────────────
+git_safety:
+  no_revert_unrelated: true
+  isolated_commits_per_task: true
+  codex_only_publish:
+    include:
+      - .codex-agent/**
+      - .github/**
+      - tools/**
+      - "*.md"
+      - "*.bat"
+      - "*.cmd"
+    never_include:
+      - "*.key"
+      - "*.pem"
+      - ".env*"
+      - "*token*"
+      - "*secret*"
