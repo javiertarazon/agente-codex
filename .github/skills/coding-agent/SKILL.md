@@ -1,10 +1,6 @@
 ---
 name: coding-agent
 description: Run Codex CLI, Claude Code, OpenCode, or Pi Coding Agent via background process for programmatic control.
-metadata:
-  {
-    "openclaw": { "emoji": "🧩", "requires": { "anyBins": ["claude", "codex", "opencode", "pi"] } },
-  }
 ---
 
 # Coding Agent (bash-first)
@@ -92,7 +88,7 @@ process action:submit sessionId:XXX data:"yes"
 process action:kill sessionId:XXX
 ```
 
-**Why workdir matters:** Agent wakes up in a focused directory, doesn't wander off reading unrelated files (like your soul.md 😅).
+**Why workdir matters:** Agent wakes up in a focused directory, doesn't wander off reading unrelated files.
 
 ---
 
@@ -120,36 +116,27 @@ bash pty:true workdir:~/project background:true command:"codex --yolo 'Refactor 
 
 ### Reviewing PRs
 
-**⚠️ CRITICAL: Never review PRs in OpenClaw's own project folder!**
-Clone to temp folder or use git worktree.
-
 ```bash
 # Clone to temp for safe review
 REVIEW_DIR=$(mktemp -d)
 git clone https://github.com/user/repo.git $REVIEW_DIR
 cd $REVIEW_DIR && gh pr checkout 130
 bash pty:true workdir:$REVIEW_DIR command:"codex review --base origin/main"
-# Clean up after: trash $REVIEW_DIR
 
 # Or use git worktree (keeps main intact)
 git worktree add /tmp/pr-130-review pr-130-branch
 bash pty:true workdir:/tmp/pr-130-review command:"codex review --base main"
 ```
 
-### Batch PR Reviews (parallel army!)
+### Batch PR Reviews (parallel)
 
 ```bash
-# Fetch all PR refs first
 git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'
 
-# Deploy the army - one Codex per PR (all with PTY!)
 bash pty:true workdir:~/project background:true command:"codex exec 'Review PR #86. git diff origin/main...origin/pr/86'"
 bash pty:true workdir:~/project background:true command:"codex exec 'Review PR #87. git diff origin/main...origin/pr/87'"
 
-# Monitor all
 process action:list
-
-# Post results to GitHub
 gh pr comment <PR#> --body "<review content>"
 ```
 
@@ -158,43 +145,13 @@ gh pr comment <PR#> --body "<review content>"
 ## Claude Code
 
 ```bash
-# With PTY for proper terminal output
 bash pty:true workdir:~/project command:"claude 'Your task'"
-
-# Background
 bash pty:true workdir:~/project background:true command:"claude 'Your task'"
 ```
 
 ---
 
-## OpenCode
-
-```bash
-bash pty:true workdir:~/project command:"opencode run 'Your task'"
-```
-
----
-
-## Pi Coding Agent
-
-```bash
-# Install: npm install -g @mariozechner/pi-coding-agent
-bash pty:true workdir:~/project command:"pi 'Your task'"
-
-# Non-interactive mode (PTY still recommended)
-bash pty:true command:"pi -p 'Summarize src/'"
-
-# Different provider/model
-bash pty:true command:"pi --provider openai --model gpt-4o-mini -p 'Your task'"
-```
-
-**Note:** Pi now has Anthropic prompt caching enabled (PR #584, merged Jan 2026)!
-
----
-
 ## Parallel Issue Fixing with git worktrees
-
-For fixing multiple issues in parallel, use git worktrees:
 
 ```bash
 # 1. Create worktrees for each issue
@@ -224,15 +181,11 @@ git worktree remove /tmp/issue-99
 
 1. **Always use pty:true** - coding agents need a terminal!
 2. **Respect tool choice** - if user asks for Codex, use Codex.
-   - Orchestrator mode: do NOT hand-code patches yourself.
-   - If an agent fails/hangs, respawn it or ask the user for direction, but don't silently take over.
 3. **Be patient** - don't kill sessions because they're "slow"
 4. **Monitor with process:log** - check progress without interfering
 5. **--full-auto for building** - auto-approves changes
 6. **vanilla for reviewing** - no special flags needed
 7. **Parallel is OK** - run many Codex processes at once for batch work
-8. **NEVER start Codex in ~/clawd/** - it'll read your soul docs and get weird ideas about the org chart!
-9. **NEVER checkout branches in ~/Projects/openclaw/** - that's the LIVE OpenClaw instance!
 
 ---
 
@@ -241,44 +194,15 @@ git worktree remove /tmp/issue-99
 When you spawn coding agents in the background, keep the user in the loop.
 
 - Send 1 short message when you start (what's running + where).
-- Then only update again when something changes:
-  - a milestone completes (build finished, tests passed)
-  - the agent asks a question / needs input
-  - you hit an error or need user action
-  - the agent finishes (include what changed + where)
+- Only update again when: a milestone completes, agent asks a question, you hit an error, or agent finishes.
 - If you kill a session, immediately say you killed it and why.
-
-This prevents the user from seeing only "Agent failed before reply" and having no idea what happened.
 
 ---
 
 ## Auto-Notify on Completion
 
-For long-running background tasks, append a wake trigger to your prompt so OpenClaw gets notified immediately when the agent finishes (instead of waiting for the next heartbeat):
-
-```
-... your task here.
-
-When completely finished, run this command to notify me:
-openclaw system event --text "Done: [brief summary of what was built]" --mode now
-```
-
-**Example:**
-
 ```bash
 bash pty:true workdir:~/project background:true command:"codex --yolo exec 'Build a REST API for todos.
 
-When completely finished, run: openclaw system event --text \"Done: Built todos REST API with CRUD endpoints\" --mode now'"
+When completely finished, run: openclaw system event --text \"Done: Built todos REST API\" --mode now'"
 ```
-
-This triggers an immediate wake event — Skippy gets pinged in seconds, not 10 minutes.
-
----
-
-## Learnings (Jan 2026)
-
-- **PTY is essential:** Coding agents are interactive terminal apps. Without `pty:true`, output breaks or agent hangs.
-- **Git repo required:** Codex won't run outside a git directory. Use `mktemp -d && git init` for scratch work.
-- **exec is your friend:** `codex exec "prompt"` runs and exits cleanly - perfect for one-shots.
-- **submit vs write:** Use `submit` to send input + Enter, `write` for raw data without newline.
-- **Sass works:** Codex responds well to playful prompts. Asked it to write a haiku about being second fiddle to a space lobster, got: _"Second chair, I code / Space lobster sets the tempo / Keys glow, I follow"_ 🦞

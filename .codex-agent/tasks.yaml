@@ -483,6 +483,37 @@
                     "text": "eliminada línea suelta 'D:\\javie\\OPEN CLAW' al final del archivo"
                 }
             ]
+        },
+        {
+            "id": "task-20260219-fix-skill-syntax",
+            "title": "Corregir errores de sintaxis en coding-agent, github y skill-creator SKILL.md",
+            "status": "done",
+            "scope": "workspace",
+            "risk": "low",
+            "requires_double_confirmation": false,
+            "created_at": "2026-02-19T00:04:00-04:00",
+            "steps": [
+                {
+                    "timestamp": "2026-02-19T00:04:00-04:00",
+                    "text": "diagnosticados errores: coding-agent y github tienen metadata con atributo 'openclaw' no soportado por VS Code; skill-creator tiene links rotos a FORMS.md, REFERENCE.md, EXAMPLES.md, DOCX-JS.md, REDLINING.md"
+                },
+                {
+                    "timestamp": "2026-02-19T00:04:00-04:00",
+                    "text": "corregido coding-agent/SKILL.md: eliminado bloque metadata con 'openclaw' del frontmatter YAML"
+                },
+                {
+                    "timestamp": "2026-02-19T00:04:00-04:00",
+                    "text": "corregido github/SKILL.md: eliminado bloque metadata con 'openclaw', 'install', 'requires' del frontmatter YAML"
+                },
+                {
+                    "timestamp": "2026-02-19T00:04:00-04:00",
+                    "text": "corregido skill-creator/SKILL.md: reemplazados 5 links [file](file) por backtick inline code 'file' dentro de bloques de ejemplo"
+                },
+                {
+                    "timestamp": "2026-02-19T00:04:00-04:00",
+                    "text": "verificado: get_errors devuelve 0 errores en los tres archivos"
+                }
+            ]
         }
     ]
 }
