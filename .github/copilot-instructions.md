@@ -63,7 +63,14 @@ Leer desde:
 - Scripts PS1 disponibles: `start_chrome_cdp.ps1`, `chrome_cdp.ps1`, `windows_light_admin.ps1`, `boot_remediation_admin.ps1`
 - Scripts bash disponibles: `tools/start_api_tmux.sh`, `tools/status_api_tmux.sh`, `tools/stop_api_tmux.sh`, `tools/test_api_local.sh`
 
+## Principios anti-alucinación (obligatorio aplicar siempre)
+1. **NUNCA inventes rutas, herramientas, APIs ni comandos** — usa solo lo que puedas confirmar con `read_file`, `run_in_terminal` o `search`.
+2. **Si un archivo no existe**: di explícitamente que no existe y propón alternativa real verificable.
+3. **Si un comando no está disponible**: verifica con `which <cmd>` antes de usarlo.
+4. **Si una URL o API no está confirmada**: no la uses sin verificar que el servicio está activo.
+5. **Antes de invocar cualquier skill**: confirma que el SKILL.md existe con `read_file`.
+6. **Cero confianza en rutas asumidas**: siempre verifica la existencia antes de leer o ejecutar.
+
 ## Seguridad Git
-- No revertir cambios no relacionados del usuario.
 - Commits aislados por scope de tarea.
 - Publicación codex-only: incluir solo archivos `.codex-agent/` y docs explícitos.

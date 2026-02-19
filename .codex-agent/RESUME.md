@@ -1,71 +1,25 @@
-# Estado de reanudación (Codex / openclaw-local-agent)
+# RESUME — openclaw-local-agent
 
-- **Fecha/Hora:** 2026-02-19T00:00:00.000000-04:00
-- **Workspace:** `/mnt/d/javie/agente codex/proyecto agente codex`
-- **Repositorio:** `https://github.com/javiertarazon/agente-codex.git`
-- **Rama activa:** `master`
-- **Identidad operativa:** `openclaw-local-agent`
-- **Estado git:** limpio (sin cambios locales)
+## Último estado
+- **Rama**: master
+- **Commit previo**: d2d1d8f
 
-## Último hito completado
-- Repositorio correcto actualizado y validado en la ruta final.
+## Sesión actual — Globalización del agente
 
-## Tarea activa
-- `task-20260219-121234902` — Definir flujo operativo para retomar tareas con registro continuo.
+### Completado
+- `task-20260219-fix-agent-prompt-syntax` — Corregir sintaxis agent + prompt files (done)
+- `task-20260219-globalize-agent` — Globalizar openclaw-local-agent con 12 skills, autonomía y anti-alucinación (done)
 
-## Siguiente paso inmediato
-1. Crear una tarea nueva en `.codex-agent/tasks.yaml` antes de cada cambio.
-2. Registrar avances en `steps` + evento en `.codex-agent/audit-log.jsonl`.
-3. Al cerrar sesión, actualizar este archivo con el próximo comando exacto.
+### Cambios realizados en esta sesión
+1. **`.github/agents/openclaw.agent.md`** — Expandido de 5 a 12 skills + reglas anti-alucinación
+2. **`/mnt/c/Users/javie/AppData/Roaming/Code/User/settings.json`** — `github.copilot.chat.codeGeneration.instructions` añadido (instrucciones GLOBALES a todos los workspaces)
+3. **`/home/javie/.copilo-agent-global/openclaw.agent.md`** — Agente creado en directorio global (cargado por `chat.agentFilesLocations`)
+4. **`.codex-agent/global/model_instructions_global.md`** — Añadidos 12 skills + anti-alucinación
+5. **`.github/copilot-instructions.md`** — Sección anti-alucinación añadida
 
-## Comando rápido para retomar
-```bash
-cd "/mnt/d/javie/agente codex/proyecto agente codex"
-```
+### Skills activos (12 total)
+openclaw-local-agent, task-tracker, windows-admin, api-local, chrome-cdp, coding-agent, github, tmux, review-pr, prepare-pr, merge-pr, skill-creator
 
-
----
-
-## Actualización 2026-02-19T12:15:27.888462-04:00
-- API local lista: `tools/github_models_proxy.py` (`POST /chat` en `http://127.0.0.1:8787`).
-- Tarea activa: `task-20260219-121527904` (bitácora continua).
-
-
-## Actualización 2026-02-19T12:25:00.759851-04:00
-- API local levantada en tmux: sesión `agente-codex-api`.
-- Scripts listos: `tools/start_api_tmux.sh`, `tools/status_api_tmux.sh`, `tools/test_api_local.sh`, `tools/stop_api_tmux.sh`.
-- Pendiente para respuesta real del modelo: ejecutar start con `GITHUB_TOKEN` válido.
-- Comando exacto:
-  - `cd "/mnt/d/javie/agente codex/proyecto agente codex"`
-  - `GITHUB_TOKEN="<tu_token>" ./tools/start_api_tmux.sh`
-  - `./tools/test_api_local.sh "hola"`
-
-- 2026-02-19T12:31:14.828009-04:00: default del proxy actualizado a openai/gpt-5.3-codex.
-
-- 2026-02-19T12:38:55.879631-04:00: creado tools/api_local.ps1 (start/status/test/stop/restart) para PowerShell.
-
-- 2026-02-19T12:41:59.580689-04:00: agregados .bat de doble clic (start/status/test/stop) para API local.
-
-- 2026-02-19T12:54:57.167649-04:00: flujo sin token manual habilitado (gh auth token fallback).
-
-- 2026-02-19T13:00:49.840406-04:00: compatibilidad de ejecución añadida (.cmd + symlink ruta antigua).
-
-- 2026-02-19T00:00:00.000000-04:00: **OPENCLAW ACTIVADO** — agente primario completo. Creados: SKILL.md, agent-config.yaml, openclaw.agent.md, autorun-tasks.prompt.md, openclaw-admin.instructions.md. Reescrito: copilot-instructions.md + model_instructions_global.md. Auto-ejecución y multi-agente habilitados.
-
-- 2026-02-19T00:02:00.000000-04:00: **12 SKILLS ACTIVOS** — importados 7 skills de OPEN CLAW: coding-agent, github, tmux, review-pr, prepare-pr, merge-pr, skill-creator + PR_WORKFLOW.md. commit `4b72eb9` pusheado a master.
-
-- 2026-02-19T00:03:00.000000-04:00: sección API local eliminada de SKILL maestro. commit `dcd4cfe`.
-
-- 2026-02-19T00:04:00.000000-04:00: errores sintaxis corregidos en coding-agent, github y skill-creator. commit `d9273fc`.
-
-- 2026-02-19T00:05:00.000000-04:00: errores sintaxis corregidos en openclaw.agent.md y autorun-tasks.prompt.md.
-
-## Último hito completado
-- Todos los archivos `.github/` sin errores de sintaxis. Skills, agente y prompt operativos en VS Code.
-
-## Capacidades activas
-- ✅ Auto-ejecución: `low`/`medium` sin confirmación; `high` con confirmación única
-- ✅ Multi-agente: `browser-agent`, `admin-agent`, `api-agent`, `git-agent`
-- ✅ Prompt `/autorun-tasks` disponible en Copilot Chat
-- ✅ Modo agente `openclaw` en `.github/agents/openclaw.agent.md`
-- ✅ Skills (12): openclaw-local-agent, task-tracker, windows-admin, api-local, chrome-cdp, coding-agent, github, tmux, review-pr, prepare-pr, merge-pr, skill-creator
+## Próximos pasos
+- Abrir cualquier workspace nuevo → el agente openclaw estará disponible globalmente
+- Para proyectos sin `.codex-agent/`, inicializar con el script de bootstrap global
