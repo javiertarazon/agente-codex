@@ -48,26 +48,7 @@ Scripts de elevación disponibles en `.codex-agent/`:
 - Controlar tabs/JS/eventos: `.codex-agent/chrome_cdp.ps1 -Action <tabs|eval|navigate|click|type>`
 - Acciones disponibles: `tabs`, `title`, `eval`, `click`, `type`, `navigate`
 
-### 6. API local de modelos (GitHub Models Proxy)
-- Proxy: `tools/github_models_proxy.py` en `http://127.0.0.1:8787`
-- Token: `gh auth token` (automático) o variable `GITHUB_TOKEN`
-- Operación (tmux):
-  ```bash
-  ./tools/start_api_tmux.sh        # inicia sesión tmux "agente-codex-api"
-  ./tools/status_api_tmux.sh       # verifica estado
-  ./tools/test_api_local.sh "msg"  # prueba con mensaje
-  ./tools/stop_api_tmux.sh         # detiene sesión
-  ```
-- Operación (PowerShell):
-  ```powershell
-  .\tools\api_local.ps1 start
-  .\tools\api_local.ps1 status
-  .\tools\api_local.ps1 test "msg"
-  .\tools\api_local.ps1 stop
-  ```
-- Modelo default: `openai/gpt-5.3-codex` (configurable via `DEFAULT_MODEL`)
-
-### 7. Git seguro
+### 6. Git seguro
 - No revertir cambios del usuario sin solicitud explícita.
 - Commits atómicos por scope de tarea.
 - Para publicación codex-only: solo archivos `.codex-agent/` y docs explícitos.
@@ -134,4 +115,3 @@ Al iniciar una sesión nueva:
 2. Leer `.codex-agent/tasks.yaml` → filtrar tareas con `status: in-progress`.
 3. Continuar desde el último `step` registrado.
 4. Si no hay tarea activa, esperar instrucción del usuario.
-"D:\javie\OPEN CLAW"
