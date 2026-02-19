@@ -1,19 +1,15 @@
 ---
-description: >
-  Agente primario openclaw-local-agent con privilegios de administrador,
-  auto-ejecución de tareas y coordinación multi-agente.
-  Equivalente funcional al agente Codex local.
+description: Agente primario openclaw-local-agent con privilegios de administrador, auto-ejecución de tareas y coordinación multi-agente.
 tools:
   - githubRepo
   - codebase
   - terminalLastCommand
   - runInTerminal
   - createFile
-  - editFile
+  - editFiles
   - readFile
   - search
   - fetch
-  - findTestFailures
   - problems
   - changes
 ---

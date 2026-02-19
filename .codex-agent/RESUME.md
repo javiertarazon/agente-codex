@@ -52,11 +52,20 @@ cd "/mnt/d/javie/agente codex/proyecto agente codex"
 
 - 2026-02-19T00:00:00.000000-04:00: **OPENCLAW ACTIVADO** — agente primario completo. Creados: SKILL.md, agent-config.yaml, openclaw.agent.md, autorun-tasks.prompt.md, openclaw-admin.instructions.md. Reescrito: copilot-instructions.md + model_instructions_global.md. Auto-ejecución y multi-agente habilitados.
 
+- 2026-02-19T00:02:00.000000-04:00: **12 SKILLS ACTIVOS** — importados 7 skills de OPEN CLAW: coding-agent, github, tmux, review-pr, prepare-pr, merge-pr, skill-creator + PR_WORKFLOW.md. commit `4b72eb9` pusheado a master.
+
+- 2026-02-19T00:03:00.000000-04:00: sección API local eliminada de SKILL maestro. commit `dcd4cfe`.
+
+- 2026-02-19T00:04:00.000000-04:00: errores sintaxis corregidos en coding-agent, github y skill-creator. commit `d9273fc`.
+
+- 2026-02-19T00:05:00.000000-04:00: errores sintaxis corregidos en openclaw.agent.md y autorun-tasks.prompt.md.
+
 ## Último hito completado
-- Activación completa de **openclaw-local-agent** con privilegios admin, auto-ejecución y multi-agente.
+- Todos los archivos `.github/` sin errores de sintaxis. Skills, agente y prompt operativos en VS Code.
 
 ## Capacidades activas
 - ✅ Auto-ejecución: `low`/`medium` sin confirmación; `high` con confirmación única
 - ✅ Multi-agente: `browser-agent`, `admin-agent`, `api-agent`, `git-agent`
 - ✅ Prompt `/autorun-tasks` disponible en Copilot Chat
 - ✅ Modo agente `openclaw` en `.github/agents/openclaw.agent.md`
+- ✅ Skills (12): openclaw-local-agent, task-tracker, windows-admin, api-local, chrome-cdp, coding-agent, github, tmux, review-pr, prepare-pr, merge-pr, skill-creator

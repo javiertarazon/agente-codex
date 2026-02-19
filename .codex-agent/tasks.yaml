@@ -514,6 +514,37 @@
                     "text": "verificado: get_errors devuelve 0 errores en los tres archivos"
                 }
             ]
+        },
+        {
+            "id": "task-20260219-fix-agent-prompt-syntax",
+            "title": "Corregir errores de sintaxis en openclaw.agent.md y autorun-tasks.prompt.md",
+            "status": "done",
+            "scope": "workspace",
+            "risk": "low",
+            "requires_double_confirmation": false,
+            "created_at": "2026-02-19T00:05:00-04:00",
+            "steps": [
+                {
+                    "timestamp": "2026-02-19T00:05:00-04:00",
+                    "text": "diagnosticado openclaw.agent.md: description multilinea (>) no soportada, herramientas editFile y findTestFailures no reconocidas"
+                },
+                {
+                    "timestamp": "2026-02-19T00:05:00-04:00",
+                    "text": "diagnosticado autorun-tasks.prompt.md: atributo 'mode: agent' obsoleto, description multilinea (>) no soportada"
+                },
+                {
+                    "timestamp": "2026-02-19T00:05:00-04:00",
+                    "text": "corregido openclaw.agent.md: description a una línea, editFile→editFiles, eliminado findTestFailures"
+                },
+                {
+                    "timestamp": "2026-02-19T00:05:00-04:00",
+                    "text": "corregido autorun-tasks.prompt.md: eliminado mode: agent, description a una línea"
+                },
+                {
+                    "timestamp": "2026-02-19T00:05:00-04:00",
+                    "text": "verificado: 0 errores en ambos archivos"
+                }
+            ]
         }
     ]
 }

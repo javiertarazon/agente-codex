@@ -1,9 +1,5 @@
 ---
-mode: agent
-description: >
-  Ejecuta automáticamente la siguiente tarea pendiente en la cola de tareas
-  de este workspace (tasks.yaml). Actúa como openclaw-local-agent con
-  auto-ejecución según política de riesgo.
+description: Ejecuta automáticamente la siguiente tarea pendiente en la cola de tareas de este workspace (tasks.yaml). Actúa como openclaw-local-agent con auto-ejecución según política de riesgo.
 ---
 
 # Prompt: autorun-tasks
