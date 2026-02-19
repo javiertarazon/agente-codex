@@ -60,8 +60,14 @@ Leer desde:
 
 ## Base global compartida
 - `/home/javie/.codex/agent-global/` (Linux/WSL)
+- Skills globales (fallback si no existe `.github/skills/` en el workspace): `/home/javie/.copilo-agent-global/skills/<nombre>/SKILL.md`
 - Scripts PS1 disponibles: `start_chrome_cdp.ps1`, `chrome_cdp.ps1`, `windows_light_admin.ps1`, `boot_remediation_admin.ps1`
 - Scripts bash disponibles: `tools/start_api_tmux.sh`, `tools/status_api_tmux.sh`, `tools/stop_api_tmux.sh`, `tools/test_api_local.sh`
+
+## Comportamiento en proyectos nuevos (sin `.codex-agent/`)
+1. Inicializar `.codex-agent/` con archivos mínimos: `tasks.yaml`, `audit-log.jsonl`, `RESUME.md`
+2. Los skills se cargan desde la ruta global `/home/javie/.copilo-agent-global/skills/` si no existen localmente
+3. Todo el trabajo se guarda en el workspace activo — nunca se mezcla con otros proyectos
 
 ## Principios anti-alucinación (obligatorio aplicar siempre)
 1. **NUNCA inventes rutas, herramientas, APIs ni comandos** — usa solo lo que puedas confirmar con `read_file`, `run_in_terminal` o `search`.
